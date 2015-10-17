@@ -1,0 +1,14 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+#login:
+#    pattern:   /signin
+#    defaults:  { _controller: AppBundle:Users:signIn }
+#user:
+#    resource: "@AppBundle/Controller/UsersController"
+#    type: rest
+#acme_demo_user_delete:
+#    pattern:  /users/{id}
+#    defaults: { _controller: AppBundle:Users:deleteUser, _format: ~ }
+#    requirements:
+#        _method: DELETE|GET
