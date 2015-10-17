@@ -39,12 +39,12 @@ class Websites
     /**
      * @var \DateTime
      */
-    private $created = 'CURRENT_TIMESTAMP';
+    private $created;
 
     /**
      * @var \DateTime
      */
-    private $updated = '0000-00-00 00:00:00';
+    private $updated;
 
 
     /**

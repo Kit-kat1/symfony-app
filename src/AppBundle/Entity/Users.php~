@@ -34,12 +34,12 @@ class Users
     /**
      * @var string
      */
-    protected $firstname;
+    protected $firstName;
 
     /**
      * @var string
      */
-    protected $lastname;
+    protected $lastName;
 
     /**
      * @var string
@@ -54,7 +54,7 @@ class Users
     /**
      * @var integer
      */
-    protected $phonenumber;
+    protected $phoneNumber;
 
     /**
      * @var \DateTime
@@ -64,10 +64,12 @@ class Users
     /**
      * @var \DateTime
      */
-    protected $updated = '0000-00-00 00:00:00';
+    protected $updated;
 
     /**
-     * @var \AppBundle\Entity\Roles
+     * @OneToOne(targetEntity="Roles")
+     * @JoinColumn(name="roleId", referencedColumnName="id")
+     * @var integer
      */
     protected $roleid;
 
@@ -155,51 +157,51 @@ class Users
     }
 
     /**
-     * Set firstname
+     * Set firstName
      *
-     * @param string $firstname
+     * @param string $firstName
      *
      * @return Users
      */
-    public function setFirstname($firstname)
+    public function setFirstName($firstName)
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     /**
-     * Get firstname
+     * Get firstName
      *
      * @return string
      */
-    public function getFirstname()
+    public function getFirstName()
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
     /**
-     * Set lastname
+     * Set lastName
      *
-     * @param string $lastname
+     * @param string $lastName
      *
      * @return Users
      */
-    public function setLastname($lastname)
+    public function setLastname($lastName)
     {
-        $this->lastname = $lastname;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
     /**
-     * Get lastname
+     * Get lastName
      *
      * @return string
      */
-    public function getLastname()
+    public function getLastName()
     {
-        return $this->lastname;
+        return $this->lastName;
     }
 
     /**
@@ -251,27 +253,27 @@ class Users
     }
 
     /**
-     * Set phonenumber
+     * Set phoneNumber
      *
-     * @param integer $phonenumber
+     * @param integer $phoneNumber
      *
      * @return Users
      */
-    public function setPhonenumber($phonenumber)
+    public function setPhoneNumber($phoneNumber)
     {
-        $this->phonenumber = $phonenumber;
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
 
     /**
-     * Get phonenumber
+     * Get phoneNumber
      *
      * @return integer
      */
-    public function getPhonenumber()
+    public function getPhoneNumber()
     {
-        return $this->phonenumber;
+        return $this->phoneNumber;
     }
 
     /**
@@ -325,13 +327,11 @@ class Users
     /**
      * Set roleid
      *
-     * @param \AppBundle\Entity\Roles $roleid
-     *
      * @return Users
      */
-    public function setRoleid(\AppBundle\Entity\Roles $roleid = null)
+    public function setRoleId($roleId)
     {
-        $this->roleid = $roleid;
+        $this->roleid = $roleId;
 
         return $this;
     }
@@ -339,12 +339,27 @@ class Users
     /**
      * Get roleid
      *
-     * @return \AppBundle\Entity\Roles
+     * @return integer
      */
-    public function getRoleid()
+    public function getRoleId()
     {
         return $this->roleid;
     }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+//    /**
+//     * @param UserInterface $user
+//     * @return boolean
+//     */
+//    public function equals(UserInterface $user)
+//    {
+//        return md5($this->getUsername()) == md5($user->getUsername());
+//    }
+
 
     public function __construct()
     {

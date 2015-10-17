@@ -1,7 +1,9 @@
 <?php
+
 namespace AppBundle\Entity;
-use Symfony\Component\Security\Core\Role\RoleInterface;
+
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Roles
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RolesRepository")
@@ -12,13 +14,17 @@ class Roles
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $role;
+    protected $name;
 
+    /**
+     * @var \DateTime
+     */
+    protected $created;
 
     /**
      * Get id
@@ -31,26 +37,55 @@ class Roles
     }
 
     /**
-     * Set role
+     * Set name
      *
-     * @param string $role
+     * @param string $name
      *
      * @return Roles
      */
-    public function setRole($role)
+    public function setName($name)
     {
-        $this->role = $role;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get role
+     * Get name
      *
      * @return string
      */
-    public function getRole()
+    public function getName()
     {
-        return $this->role;
+        return $this->name;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return Users
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    public function __construct()
+    {
+        $this->created = new \DateTime();
     }
 }

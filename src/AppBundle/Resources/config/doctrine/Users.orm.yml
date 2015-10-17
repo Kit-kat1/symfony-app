@@ -43,14 +43,14 @@ AppBundle\Entity\Users:
             length: 255
             options:
                 fixed: false
-        firstname:
+        firstName:
             type: string
             nullable: false
             length: 255
             options:
                 fixed: false
             column: firstName
-        lastname:
+        lastName:
             type: string
             nullable: false
             length: 255
@@ -70,7 +70,7 @@ AppBundle\Entity\Users:
             options:
                 fixed: false
                 default: disabled
-        phonenumber:
+        phoneNumber:
             type: bigint
             nullable: false
             options:
@@ -86,7 +86,7 @@ AppBundle\Entity\Users:
             nullable: false
             options:
                 default: '0000-00-00 00:00:00'
-    manyToOne:
+    oneToOne:
         roleid:
             targetEntity: Roles
             cascade: {  }

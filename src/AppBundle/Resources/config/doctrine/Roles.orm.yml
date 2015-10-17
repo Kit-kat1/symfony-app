@@ -11,10 +11,15 @@ AppBundle\Entity\Roles:
             generator:
                 strategy: IDENTITY
     fields:
-        role:
+        name:
             type: string
             nullable: false
             length: 15
             options:
                 fixed: false
+        created:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
     lifecycleCallbacks: {  }
