@@ -5,12 +5,15 @@
  * Date: 10/13/15
  * Time: 2:53 PM
  */
+
 namespace AppBundle\DataFixtures\ORM;
+
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use AppBundle\Entity\Users;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Roles;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+
 class FixtureLoader implements FixtureInterface
 {
     /**

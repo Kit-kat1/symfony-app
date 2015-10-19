@@ -90,6 +90,7 @@ AppBundle\Entity\Users:
         roleid:
             targetEntity: Roles
             cascade: {  }
+            nullable: false
             fetch: LAZY
             mappedBy: null
             inversedBy: null
