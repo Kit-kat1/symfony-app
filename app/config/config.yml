@@ -8,34 +8,9 @@ imports:
 parameters:
     locale: en
 
-security:
-    encoders:
-        AppBundle\Entity\User:
-            algorithm: sha512
-            encode-as-base64: true
-            iterations: 10
-
-#    providers:
-#        main:
-#            entity: { class: AppBundle:Users, property:  username}
-
-    firewalls:
-        main:
-            pattern: /.*
-            form_login:
-                check_path: /login_check
-                login_path: /login
-            logout: true
-            security: true
-            anonymous: true
-
-    access_control:
-        - { path: /admin.*, role: ROLE_ADMIN }
-        - { path: /.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -128,7 +103,10 @@ fos_rest:
         codes:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
             'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
-
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\Users
 #fos_rest:
 #    disable_csrf_role:    null
 #    access_denied_listener:

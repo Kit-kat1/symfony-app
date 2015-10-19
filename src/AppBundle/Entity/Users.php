@@ -2,13 +2,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * Users
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UsersRepository")
  * @ORM\Table(name="users")
  */
-class Users
+class Users extends BaseUser
 {
     
     /**
@@ -19,32 +20,12 @@ class Users
     /**
      * @var string
      */
-    protected $username;
-
-    /**
-     * @var string
-     */
-    protected $password;
-
-    /**
-     * @var string
-     */
-    protected $salt;
-
-    /**
-     * @var string
-     */
     protected $firstName;
 
     /**
      * @var string
      */
     protected $lastName;
-
-    /**
-     * @var string
-     */
-    protected $email;
 
     /**
      * @var string
@@ -82,78 +63,6 @@ class Users
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return Users
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return Users
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     *
-     * @return Users
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
     }
 
     /**
@@ -202,30 +111,6 @@ class Users
     public function getLastName()
     {
         return $this->lastName;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return Users
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
@@ -360,25 +245,63 @@ class Users
 //        return md5($this->getUsername()) == md5($user->getUsername());
 //    }
 
-
     public function __construct()
     {
+        parent::__construct();
         $this->created = new \DateTime();
     }
-    /**
-     * @var string
-     */
-    private $firstname;
 
     /**
-     * @var string
+     * Serializes the user.
+     *
+     * The serialized data have to contain the fields used during check for
+     * changes and the id.
+     *
+     * @return string
      */
-    private $lastname;
+    public function serialize()
+    {
+        return serialize(array(
+            $this->password,
+            $this->salt,
+            $this->firstName,
+            $this->username,
+            $this->active,
+            $this->lastName,
+            $this->phoneNumber,
+            $this->updated,
+            $this->id,
+            $this->created,
+            $this->roleid,
+            $this->email,
+        ));
+    }
 
     /**
-     * @var integer
+     * Unserializes the user.
+     *
+     * @param string $serialized
      */
-    private $phonenumber;
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+        // add a few extra elements in the array to ensure that we have enough keys when unserializing
+        // older data which does not include all properties.
+        $data = array_merge($data, array_fill(0, 2, null));
 
-
+        list(
+            $this->password,
+            $this->salt,
+            $this->firstName,
+            $this->username,
+            $this->active,
+            $this->lastName,
+            $this->phoneNumber,
+            $this->updated,
+            $this->id,
+            $this->created,
+            $this->roleid,
+            $this->email,
+            ) = $data;
+    }
 }

@@ -12,6 +12,7 @@ use AppBundle\Entity\Users;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AuthController extends Controller
@@ -21,6 +22,16 @@ class AuthController extends Controller
      */
     public function loginAction()
     {
+        if ($this->get('request')->attributes->has(Security::AUTHENTICATION_ERROR)) {
+            $error = $this->get('request')->attributes->get(Security::AUTHENTICATION_ERROR);
+        } else {
+            $error = $this->get('request')->getSession()->get(Security::AUTHENTICATION_ERROR);
+        }
+
+        return $this->render('admin2/login.html.twig', array(
+            'last_username' => $this->get('request')->getSession()->get(Security::LAST_USERNAME),
+            'error' => $error
+        ));
     }
     /**
      * @Route("/login_check")

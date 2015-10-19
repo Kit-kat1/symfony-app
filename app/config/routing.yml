@@ -1,9 +1,8 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-#login:
-#    pattern:   /signin
-#    defaults:  { _controller: AppBundle:Users:signIn }
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 #user:
 #    resource: "@AppBundle/Controller/UsersController"
 #    type: rest
