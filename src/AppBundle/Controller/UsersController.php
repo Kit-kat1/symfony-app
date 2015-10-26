@@ -8,39 +8,48 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+use AppBundle\Form\UsersType;
 use AppBundle\Entity\Users;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class UsersController extends Controller
 {
+    /**
+     * @Route("/create/user", name="createUser")
+     */
+    public function createUserAction()
+    {
+
+    }
+
     /**
      * @Route("/", name="homepage")
      */
     public function indexAction()
     {
-        return $this->render('admin2/index.html.twig', array('user' => 0));
+        return $this->render('admin2/header.html.twig', array('user' => $this->getUser()));
     }
+
+    /**
+     * @Route("/input")
+     */
+    public function inputAction()
+    {
+        return $this->render('admin2/input.html');
+    }
+
     /**
      * @Route("/dashboard", name="dashboard")
      */
     public function showDashboard()
     {
-        return $this->render('admin2/dashboard.html.twig', array('user' => 0));
-    }
-
-    /**
-     * @Route("/signin")
-     */
-    public function showSignInAction()
-    {
-        return $this->render('admin2/login.html.twig', array('user' => 0));
-    }
-
-    /**
-     * @Route("/signup")
-     */
-    public function showSignUpAction()
-    {
-        return $this->render('admin2/signup.html.twig', array('user' => 0));
+//        $response = new Response();
+//        $response->headers->setCookie(new Cookie('token', 'sdgdgwegwegwe4334'));
+//        $response->send();
+        return $this->render('admin2/dashboard.html.twig', array('user' => $this->getUser()));
     }
 }

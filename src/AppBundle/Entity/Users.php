@@ -3,56 +3,67 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Users
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UsersRepository")
  * @ORM\Table(name="users")
+ * @ExclusionPolicy("all")
  */
 class Users extends BaseUser
 {
     
     /**
      * @var integer
+     * @Expose
      */
     protected $id;
 
     /**
      * @var string
+     * @Expose
      */
     protected $firstName;
 
     /**
      * @var string
+     * @Expose
      */
     protected $lastName;
-
-    /**
-     * @var string
-     */
-    protected $active = 'disabled';
+//
+//    /**
+//     * @var string
+//     */
+//    protected $active = 'disabled';
 
     /**
      * @var integer
+     * @Expose
      */
     protected $phoneNumber;
 
     /**
      * @var \DateTime
+     * @Expose
      */
     protected $created;
 
     /**
      * @var \DateTime
+     * @Expose
      */
     protected $updated;
 
-    /**
-     * @OneToOne(targetEntity="Roles")
-     * @JoinColumn(name="roleId", referencedColumnName="id")
-     * @var integer
-     */
-    protected $roleid;
+//    /**
+//     * @OneToOne(targetEntity="Roles")
+//     * @JoinColumn(name="roleId", referencedColumnName="id")
+//     * @var integer
+//     */
+//    protected $roleid;
 
 
     /**
@@ -75,6 +86,25 @@ class Users extends BaseUser
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function set()
+    {
+        return 'qq';
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     *
+     * @return Users
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
 
         return $this;
     }
@@ -113,29 +143,29 @@ class Users extends BaseUser
         return $this->lastName;
     }
 
-    /**
-     * Set active
-     *
-     * @param string $active
-     *
-     * @return Users
-     */
-    public function setActive($active)
-    {
-        $this->active = $active;
-
-        return $this;
-    }
-
-    /**
-     * Get active
-     *
-     * @return string
-     */
-    public function getActive()
-    {
-        return $this->active;
-    }
+//    /**
+//     * Set active
+//     *
+//     * @param string $active
+//     *
+//     * @return Users
+//     */
+//    public function setActive($active)
+//    {
+//        $this->active = $active;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get active
+//     *
+//     * @return string
+//     */
+//    public function getActive()
+//    {
+//        return $this->active;
+//    }
 
     /**
      * Set phoneNumber
@@ -209,27 +239,27 @@ class Users extends BaseUser
         return $this->updated;
     }
 
-    /**
-     * Set roleid
-     *
-     * @return Users
-     */
-    public function setRoleId($roleId)
-    {
-        $this->roleid = $roleId;
-
-        return $this;
-    }
-
-    /**
-     * Get roleid
-     *
-     * @return integer
-     */
-    public function getRoleId()
-    {
-        return $this->roleid;
-    }
+//    /**
+//     * Set roleid
+//     *
+//     * @return Users
+//     */
+//    public function setRoleId($roleId)
+//    {
+//        $this->roleid = $roleId;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get roleid
+//     *
+//     * @return integer
+//     */
+//    public function getRoleId()
+//    {
+//        return $this->roleid;
+//    }
 
     public function eraseCredentials()
     {
@@ -247,8 +277,8 @@ class Users extends BaseUser
 
     public function __construct()
     {
-        parent::__construct();
         $this->created = new \DateTime();
+        parent::__construct();
     }
 
     /**
@@ -266,13 +296,14 @@ class Users extends BaseUser
             $this->salt,
             $this->firstName,
             $this->username,
-            $this->active,
+//            $this->active,
             $this->lastName,
             $this->phoneNumber,
             $this->updated,
             $this->id,
             $this->created,
-            $this->roleid,
+//            $this->roleid,
+            $this->roles,
             $this->email,
         ));
     }
@@ -294,13 +325,14 @@ class Users extends BaseUser
             $this->salt,
             $this->firstName,
             $this->username,
-            $this->active,
+//            $this->active,
             $this->lastName,
             $this->phoneNumber,
             $this->updated,
             $this->id,
             $this->created,
-            $this->roleid,
+            $this->roles,
+//            $this->roleid,
             $this->email,
             ) = $data;
     }

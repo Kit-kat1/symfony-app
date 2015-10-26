@@ -2,9 +2,9 @@ AppBundle\Entity\Users:
     type: entity
     table: users
     indexes:
-        fk_users_1_idx:
-            columns:
-                - roleId
+#        fk_users_1_idx:
+#            columns:
+#                - roleId
     uniqueConstraints:
         email_UNIQUE:
             columns:
@@ -63,13 +63,13 @@ AppBundle\Entity\Users:
 #            length: 255
 #            options:
 #                fixed: false
-        active:
-            type: string
-            nullable: false
-            length: 10
-            options:
-                fixed: false
-                default: disabled
+#        active:
+#            type: string
+#            nullable: false
+#            length: 10
+#            options:
+#                fixed: false
+#                default: disabled
         phoneNumber:
             type: bigint
             nullable: false
@@ -86,16 +86,16 @@ AppBundle\Entity\Users:
             nullable: false
             options:
                 default: '0000-00-00 00:00:00'
-    oneToOne:
-        roleid:
-            targetEntity: Roles
-            cascade: {  }
-            nullable: false
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                roleId:
-                    referencedColumnName: id
-            orphanRemoval: false
+#    oneToOne:
+#        roleid:
+#            targetEntity: Roles
+#            cascade: {  }
+#            nullable: false
+#            fetch: LAZY
+#            mappedBy: null
+#            inversedBy: null
+#            joinColumns:
+#                roleId:
+#                    referencedColumnName: id
+#            orphanRemoval: false
     lifecycleCallbacks: {  }

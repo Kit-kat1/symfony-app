@@ -1,8 +1,21 @@
+fos_rest_api:
+    type: rest
+    prefix: /api
+    resource: "@FosRestApiBundle/Resources/config/routing.yml"
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+
+
+
+#user_registration:
+#    path:     /register
+#    defaults: { _controller: AppBundle:Users:register }
 #user:
 #    resource: "@AppBundle/Controller/UsersController"
 #    type: rest
